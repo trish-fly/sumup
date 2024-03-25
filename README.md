@@ -9,10 +9,13 @@
   Contains requirements.txt file, setup for dbt including sources, project file and the main daily_import_dag
 
 ## /scr directory
-  Contains files with .xlsx and .csv suffixes as well as functions to convert to CSV and import data to BQ
+  Contains files with .xlsx and .csv suffixes as well as functions to convert to CSV and import data to BQ.
+  Please note that a full path defined for the input and output folders should be either replaced by yours (use os.chdir('[path]') or ideally store the path in your ~zrsh file.
+
 
 ## /documentation
   Contains main dbt .md file with documented models, metrics and dimensions
 
 ## /queries
-  Contains curated and reporting folders. Under curated can be found model materialisations with respective config and .yml files with sample documentation and tests included. Under reporting can be found queries to answer the 5 questions from the technical task.
+  Contains curated and reporting folders. Under curated can be found model materialisations with respective config and .yml files with sample documentation and tests included. 
+  Under reporting can be found queries to answer the 5 questions from the technical task.
