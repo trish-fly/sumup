@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stores
+    meta:
+      owner: '{{ var("analytics_owner") }}'
+      slack_id: '{{ var("product_analytics_patricia_slack_id") }}'
+      tier: '{{ var("tier_2_data_asset") }}'
+
+    description: '{{ doc("model_transactions") }}'
+
+    columns:
+      - name: store_uuid
+        description: '{{ doc("transaction_uuid") }}'
+        tests:
+          - unique
+          - not_null
+
+      - name: device_id
+        description: '{{ doc("device_id") }}'
+
+      - name: product_name
+        description: '{{ doc("product_name") }}'
+
+      - name: product_sku
+        description: '{{ doc("product_sku") }}'
+
+#     ...etc, each column to be documented

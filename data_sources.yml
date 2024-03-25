@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: "raw_layer"
+    database: "sumup-raw"
+    schema: csv_import
+    tables:
+      - name: sumup_device
+      - name: sumup_store
+      - name: sumup_transaction
