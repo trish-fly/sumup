@@ -3,7 +3,6 @@
 
     materialized = 'table',
     schema       = 'curated',
-    cluster_by   = ['type'],
     tags         = ['daily_dag', 'tier_2_data_asset']
  )
 }}
@@ -17,12 +16,13 @@ with devices as (
 
     select *
 
-    from {{ source ('raw_layer', 'sumup_device') }}
+    from  {{ source ('raw_layer', 'sumup_device') }}
 
 ----- Proposal to filter for the latest data insertion based on timestamp, this shall be added to the raw table
 --     where date(ingestion_timestamp)
 --            between date_sub(date('{{ var("data_interval_end") }}'), interval 1 day )
 --            and date('{{ var("data_interval_end") }}')
+
 )
 
 --- END of IMPORT CTEs ---

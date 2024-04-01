@@ -4,7 +4,14 @@
     materialized            = 'incremental',
     incremental_strategy    = 'insert_overwrite',
     schema                  = 'curated',
-    partition_by            = 'created_at',
+    partition_by            =
+        {
+          "field": "created_at",
+          "data_type": "timestamp",
+          "granularity": "day",
+          "time_ingestion_partitioning": true,
+          "copy_partitions": true
+    },
     cluster_by              = ['country', 'city'],
     tags                    = ['daily_dag', 'tier_2_data_asset']
  )
@@ -26,17 +33,17 @@ with stores as (
     {% if is_incremental() %}
 
     where
-        created_at >= (select max(created_at) from {{ this }})
+        date(created_at) >= (select max(date(created_at)) from {{ this }})
 
     {% endif %}
 
-
+)
 
 --- END of IMPORT CTEs ---
 ----------------------------------------------------------------------------------------
 --- LOGICAL CTEs ---
 
-, final as(
+, final as (
 
     select
           cast(id as int64)                                     as store_uuid

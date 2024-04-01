@@ -8,6 +8,7 @@
  )
 }}
 
+---- TASK: get top 10 products sold
 ----------------------------------------------------------------------------------------
 --- IMPORT CTEs ---
 
@@ -15,7 +16,8 @@ with transactions as (
 
     select *
 
-    from {{ ref('transactions') }}
+    from sumup-raw.curated.transactions
+--    from  ref('transactions')
     where status = 'accepted'
 )
 

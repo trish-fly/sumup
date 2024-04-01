@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: devices
+    meta:
+      owner: '{{ var("data_analytics_owner") }}'
+      slack_id: '{{ var("analytics_patricia_slack_id") }}'
+      tier: '{{ var("tier_2_data_asset") }}'
+
+    description: '{{ doc("model_devices") }}'
+
+    columns:
+      - name: device_uuid
+        description: '{{ doc("device_id") }}'
+        tests:
+          - unique
+          - not_null
+
+      - name: type_id
+        description: '{{ doc("type_id") }}'
+        tests:
+          - accepted_values:
+              values: [ 1, 2, 3, 4, 5 ]
+              quote: false
+
+      - name: store_id
+        description: '{{ doc("store_id") }}'

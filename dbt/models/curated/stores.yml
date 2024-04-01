@@ -3,15 +3,15 @@ version: 2
 models:
   - name: stores
     meta:
-      owner: '{{ var("analytics_owner") }}'
-      slack_id: '{{ var("product_analytics_patricia_slack_id") }}'
+      owner: '{{ var("data_analytics_owner") }}'
+      slack_id: '{{ var("analytics_patricia_slack_id") }}'
       tier: '{{ var("tier_2_data_asset") }}'
 
     description: '{{ doc("model_stores") }}'
 
     columns:
       - name: store_uuid
-        description: '{{ doc("store_uuid") }}'
+        description: '{{ doc("store_id") }}'
         tests:
           - unique
           - not_null
@@ -24,8 +24,5 @@ models:
         tests:
           - accepted_values:
               values: ['Hotel', 'Press', 'Beauty', 'Florist', 'Service', 'FoodTruck', 'Restaurant', 'Other']
-
-      - name: type_id
-        description: '{{ doc("type_id") }}'
 
 #     ...etc, each column to be documented

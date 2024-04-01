@@ -16,6 +16,7 @@ def infer_csv_schema(csv_file):
 
 def upload_csv_to_bigquery(csv_file, project_id, dataset_id, table_id):
 
+    ### create the dataset if it does not exist and infer schema from the csv file
     client = bigquery.Client(project=project_id)
     dataset_ref = client.dataset(dataset_id)
     dataset = bigquery.Dataset(dataset_ref)
@@ -27,6 +28,7 @@ def upload_csv_to_bigquery(csv_file, project_id, dataset_id, table_id):
     table_ref = dataset_ref.table(table_id)
     schema = infer_csv_schema(csv_file)
 
+    ### load data in BQ
     job_config = bigquery.LoadJobConfig(
         write_disposition=bigquery.WriteDisposition.WRITE_APPEND, schema=schema, skip_leading_rows=1
     )

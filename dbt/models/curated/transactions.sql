@@ -4,8 +4,15 @@
     materialized            = 'incremental',
     incremental_strategy    = 'insert_overwrite',
     schema                  = 'curated',
-    partition_by            = 'created_at',
-    cluster_by              = ['device_id'],
+    partition_by            =
+        {
+          "field": "created_at",
+          "data_type": "timestamp",
+          "granularity": "day",
+          "time_ingestion_partitioning": true,
+          "copy_partitions": true
+    },
+    cluster_by              = 'device_id',
     tags                    = ['daily_dag', 'tier_2_data_asset']
  )
 }}
@@ -18,15 +25,14 @@
 with transactions as (
 
     select *
-
-    from {{ source ('raw_layer', 'sumup_transaction') }}
+    from  {{ source ('raw_layer', 'sumup_transaction') }}
 
     --- if incremental then take latest input, otherwise recreate the whole timeframe
     --- assumption here is that there are no late arriving events with created_at ts
     {% if is_incremental() %}
 
     where
-        created_at >= (select max(created_at) from {{ this }})
+        date(created_at) >= (select max(date(created_at)) from {{ this }})
 
     {% endif %}
 

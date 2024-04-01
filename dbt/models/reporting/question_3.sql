@@ -8,6 +8,7 @@
  )
 }}
 
+---- TASK: get average transacted amount per store typology and country
 ----------------------------------------------------------------------------------------
 --- IMPORT CTEs ---
 

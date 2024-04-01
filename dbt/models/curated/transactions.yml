@@ -1,17 +1,17 @@
 version: 2
 
 models:
-  - name: stores
+  - name: transactions
     meta:
-      owner: '{{ var("analytics_owner") }}'
-      slack_id: '{{ var("product_analytics_patricia_slack_id") }}'
+      owner: '{{ var("data_analytics_owner") }}'
+      slack_id: '{{ var("analytics_patricia_slack_id") }}'
       tier: '{{ var("tier_2_data_asset") }}'
 
     description: '{{ doc("model_transactions") }}'
 
     columns:
-      - name: store_uuid
-        description: '{{ doc("transaction_uuid") }}'
+      - name: transaction_uuid
+        description: '{{ doc("transaction_id") }}'
         tests:
           - unique
           - not_null

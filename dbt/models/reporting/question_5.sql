@@ -10,6 +10,7 @@
  )
 }}
 
+---- TASK: get AVG time for a store to perform its 5 first transactions
 ----------------------------------------------------------------------------------------
 --- IMPORT CTEs ---
 

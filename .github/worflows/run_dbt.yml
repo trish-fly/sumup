@@ -1,0 +1,71 @@
+#########################
+## this is a test only ##
+#########################
+
+name: run_dbt
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  GCP_PROJECT: sumup-raw
+  DBT_DIR: $GITHUB_WORKSPACE/trish-fly/sumup/dbt
+
+jobs:
+  deployment:
+    name: development-deployment
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      deployments: write
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.github.ref }}
+          fetch-depth: 1
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install python dependencies
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip3 install -r requirements.txt
+
+      - name: Install dbt packages
+        run: |
+          cd ${{env.DBT_DIR}}
+          pip install -r ../requirements.txt
+          dbt deps --profiles-dir dbt_profiles
+
+        ### I used login authentication but for a better solution could be to use
+        ##### shared service account with a key
+#      - name: Authenticate to gcloud
+#        uses: google-github-actions/auth@v1
+#        with:
+#          project_id: ${{ env.GCP_PROJECT }}
+#          credentials_json: ${{ secrets.GCP_SUMUP_DEV_SA_KEY }}   ## example
+
+      - name: Run dbt Dev
+        run: |
+          cd ${{env.DBT_DIR}}
+          dbt debug
+          dbt compile --target dev
+          dbt run --target dev
+
+      - name: Test dbt Dev
+        run: |
+          cd ${{env.DBT_DIR}}
+          dbt test --target dev
+
+      - name: Generate dbt docs
+        run: |
+          cd ${{env.DBT_DIR}}
+          dbt docs generate --profiles-dir=dbt_profiles 
