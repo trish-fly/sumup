@@ -1,0 +1,9 @@
+*.DS_Store
+target/
+dbt_packages/
+logs/
+venv/
+.idea/
+.coveragerc
+.python-version
+
