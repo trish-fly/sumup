@@ -1,9 +1,0 @@
-name: sumup_data
-config_version: 2
-version: 1.7.0
-
-require-dbt-version: ">=1.5.1"
-
-profile: sumup-data-bigquery
-
-### ...etc mandatory setup is assumed

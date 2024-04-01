@@ -1,0 +1,45 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'sumup'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'sumup-data-bigquery'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+vars:
+
+ # default dag start and end interval variable defined
+ data_interval_start: "2024-01-01T03:00:00+00:00"
+ data_interval_end: "2024-01-01T04:00:00+00:00"
+
+ # meta/tier: vars to be used in the meta object of the model .yml file
+ tier_0_data_asset: 'Tier 0'
+ tier_1_data_asset: 'Tier 1'
+ tier_2_data_asset: 'Tier 2'
+ tier_3_data_asset: 'Tier 3'
+
+ # meta/owner: Data asset owner
+ data_analytics_owner: 'Data Analytics'
+ data_science_owner: 'Data Science'
+ data_engineering_owner: 'Data Engineering'
+
+ # meta/slack_id: tagging GROUP ownership in slack alerts
+ data_analytics_owner_slack_group: 'zzz1234'
+ data_science_owner_slack_group: 'yyy1234'
+ data_engineering_owner_slack_group: 'xxx1234'
+
+ # meta/slack_id: tagging individual USERS in slack alerts
+ analytics_patricia_slack_id: '123456789'
