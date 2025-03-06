@@ -1,4 +1,4 @@
-sumup-data-bigquery:
+firsty-data-bigquery:
   target: dev
   outputs:
     dev:

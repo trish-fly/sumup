@@ -1,14 +1,14 @@
 version: 2
 
 sources:
-  - name: "raw_layer"
-    database: "firsty-raw"
-    schema: csv_import
+  - name: raw_import
+    database: firsty-case
+    schema: raw_import
     tables:
-      - name:
+      - name: firsty_use_case
 
-  - name: "curated"
-    database: "firsty-raw"
+  - name: curated
+    database: firsty-raw
     schema: firsty_curated
     tables:
       - name:
