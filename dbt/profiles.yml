@@ -7,7 +7,7 @@ sumup-data-bigquery:
       location: US
       method: oauth
       priority: interactive
-      project: sumup-raw
+      project: firsty-case
       schema: schema
       threads: 2
       type: bigquery

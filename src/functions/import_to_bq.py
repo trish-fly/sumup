@@ -2,6 +2,7 @@ from google.cloud import bigquery
 import os
 import csv
 
+
 def infer_csv_schema(csv_file):
 
     with open(csv_file, "r", newline='') as file:
@@ -42,6 +43,12 @@ def upload_csv_to_bigquery(csv_file, project_id, dataset_id, table_id):
 
 def upload_csv_files_to_bigquery(input_folder, project_id, dataset_id):
 
+    if not os.path.exists(input_folder):
+        raise FileNotFoundError(f"Directory does not exist: {input_folder}")
+
+    print(f"Looking for files in: {input_folder}")
+    print("Files found:", os.listdir(input_folder))
+
     for filename in os.listdir(input_folder):
         if filename.endswith(".csv"):
 
@@ -51,8 +58,8 @@ def upload_csv_files_to_bigquery(input_folder, project_id, dataset_id):
 
     print("Upload of all CSV files to BigQuery complete.")
 
-input_folder = "/System/Volumes/Data/Users/patricia/Documents/GitHub/sumup/src/files/csv"
-project_id = "sumup-raw"
-dataset_id = "csv_import"
+input_folder = "/Users/patricia/Documents/GitHub/firsty-app/src/files/csv/"
+project_id = "firsty-case"
+dataset_id = "raw_import"
 
 upload_csv_files_to_bigquery(input_folder, project_id, dataset_id)
