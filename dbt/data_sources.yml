@@ -1,18 +1,14 @@
 version: 2
 
 sources:
-  - name: "raw_layer"
-    database: "sumup-raw"
-    schema: csv_import
+  - name: raw_import
+    database: firsty-case
+    schema: raw_import
     tables:
-      - name: sumup_device
-      - name: sumup_store
-      - name: sumup_transaction
+      - name: firsty_use_case
 
-  - name: "curated"
-    database: "sumup-raw"
-    schema: sumup_curated
+  - name: curated
+    database: firsty-raw
+    schema: firsty_curated
     tables:
-      - name: device
-      - name: store
-      - name: transaction
+      - name:

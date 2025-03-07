@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: network
+    description: '{{ doc("model_network") }}'
+    meta:
+      owner: '{{ var("data_analytics_owner") }}'
+      slack_id: '{{ var("analytics_patricia_slack_id") }}'
+      tier: '{{ var("tier_2_data_asset") }}'
+
+    columns:
+      - name: cdr_id
+        description: '{{ doc("dim_cdr_id") }}'
+        tests:
+          - unique
+          - not_null
+        constraints:
+          - type: not_null
+
+      - name: call_type
+        description: '{{ doc("dim_call_type") }}'
+        tests:
+          - accepted_values:
+              values: ['Data']
+
+      - name: active_addon_id
+        description: '{{ doc("dim_active_addon_id") }}'
+
+      - name: active_addon_name
+        description: '{{ doc("dim_active_addon_name") }}'
+
+      - name: billable_duration
+        description: '{{ doc("dim_billable_duration") }}'
+
+      - name: call_date_time
+        description: '{{ doc("dim_call_date_time") }}'
+
+      - name: country
+        description: '{{ doc("dim_country") }}'
+
+      - name: icc_id
+        description: '{{ doc("dim_icc_id") }}'
+
+      - name: imsi
+        description: '{{ doc("dim_imsi") }}'
+
+      - name: msisdn
+        description: '{{ doc("dim_msisdn") }}'
+
+      - name: operator
+        description: '{{ doc("dim_operator") }}'
+
+      - name: traffic_type
+        description: '{{ doc("dim_traffic_type") }}'
+
+      - name: zone_id
+        description: '{{ doc("dim_zone_id") }}'
+
+      - name: actual_usage
+        description: '{{ doc("dim_actual_usage") }}'
+
+      - name: usage_category
+        description: '{{ doc("dim_usage_category") }}'
